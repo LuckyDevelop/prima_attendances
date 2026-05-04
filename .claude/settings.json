@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(php -l app/Livewire/Admin/Report/Attendance.php)",
+      "Bash(php -l app/Livewire/Admin/Report/Leave.php)",
+      "Bash(php -l app/Livewire/Admin/Report/LateArrivals.php)",
+      "Bash(php -l app/Livewire/Admin/Report/WorkingHours.php)",
+      "Bash(php -l app/Repositories/AttendanceRepository.php)"
+    ]
+  }
+}
