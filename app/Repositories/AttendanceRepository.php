@@ -63,7 +63,7 @@ class AttendanceRepository implements AttendanceRepositoryInterface
             ->orderByDesc('work_date');
 
         if (!empty($filters['month'])) {
-            $query->whereYearMonth('work_date', $filters['month']);
+            $this->applyMonthFilter($query, 'work_date', $filters['month']);
         }
 
         if (!empty($filters['status'])) {
@@ -104,7 +104,7 @@ class AttendanceRepository implements AttendanceRepositoryInterface
         }
 
         if (!empty($filters['month'])) {
-            $query->whereYearMonth('attendances.work_date', $filters['month']);
+            $this->applyMonthFilter($query, 'attendances.work_date', $filters['month']);
         }
 
         if (!empty($filters['search'])) {
@@ -378,5 +378,15 @@ class AttendanceRepository implements AttendanceRepositoryInterface
         $workDurationMin = max(0, $diffMinutes - $breakMinutes);
 
         $attendance->update(['work_duration_min' => $workDurationMin]);
+    }
+
+    private function applyMonthFilter($query, string $column, string $month): void
+    {
+        if (!preg_match('/^(\d{4})-(0[1-9]|1[0-2])$/', $month, $matches)) {
+            return;
+        }
+
+        $query->whereYear($column, (int) $matches[1])
+            ->whereMonth($column, (int) $matches[2]);
     }
 }
