@@ -113,7 +113,14 @@ class Index extends AdminComponent
     public function confirmAction(): void
     {
         if ($this->pendingAction === 'reject') {
-            $this->validate(['comment' => ['required', 'string', 'min:5', 'max:500']]);
+            $this->validate([
+                'comment' => ['required', 'string', 'min:5', 'max:500'],
+            ],
+            [
+                'comment.required' => 'Komentar wajib diisi saat menolak pengajuan.',
+                'comment.min'      => 'Komentar minimal 5 karakter.',
+                'comment.max'      => 'Komentar maksimal 500 karakter.',
+            ]);
         } else {
             $this->validate(['comment' => ['nullable', 'string', 'max:500']]);
         }

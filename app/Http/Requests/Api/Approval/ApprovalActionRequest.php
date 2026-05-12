@@ -19,4 +19,12 @@ class ApprovalActionRequest extends FormRequest
             'comment' => ['nullable', 'string', 'max:500'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'comment.string' => 'Komentar harus berupa teks.',
+            'comment.max'    => 'Komentar maksimal 500 karakter.',
+        ];
+    }
 }

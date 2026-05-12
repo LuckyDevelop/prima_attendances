@@ -79,8 +79,7 @@ class LeaveRequestController extends Controller
     public function store(StoreLeaveRequest $request): JsonResponse
     {
         $user = $request->user();
-
-        $leaveType = $this->leaveTypeRepository->find($request->leave_type_id);
+        $leaveType = $this->leaveTypeRepository->find((int) $request->leave_type_id);
         if ($leaveType === null || $leaveType->company_id !== $user->company_id) {
             return $this->notFound('Jenis cuti tidak ditemukan.');
         }
