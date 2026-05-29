@@ -59,7 +59,7 @@ class AttendanceController extends Controller
             return $this->validationError([], 'Anda sudah melakukan check-in hari ini.');
         }
 
-        $officeLocation = $this->officeLocationRepository->getById($request->office_location_id);
+        $officeLocation = $this->officeLocationRepository->getById((int) $request->office_location_id);
         if (!$officeLocation || !$officeLocation->is_active) {
             return $this->notFound('Lokasi kantor tidak ditemukan atau tidak aktif.');
         }
